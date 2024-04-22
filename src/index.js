@@ -25,16 +25,7 @@ const genDiff = (filePath1, filePath2) => {
     }
     return acc;
   }, []);
-  const unionItemsArray = [...itemsArray1, ...itemsArray2];
-  unionItemsArray.sort((a, b) => {
-    if (a[2] < b[2]) {
-      return -1;
-    }
-    if (a[2] > b[2]) {
-      return 1;
-    }
-    return 0;
-  });
+  const unionItemsArray = [...itemsArray1, ...itemsArray2].sort((a, b) => a[2].localeCompare(b[2]));
   const result = `{\n${unionItemsArray.join('\n')}\n}`;
   return result;
 };
