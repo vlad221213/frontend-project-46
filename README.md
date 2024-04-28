@@ -1,4 +1,5 @@
 ### Hexlet tests and linter status:
+[![index.js](https://github.com/vlad221213/frontend-project-46/actions/workflows/indexjs.yml/badge.svg)](https://github.com/vlad221213/frontend-project-46/actions/workflows/indexjs.yml)
 [![Actions Status](https://github.com/vlad221213/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/vlad221213/frontend-project-46/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2bae1ef0d07fde06c988/maintainability)](https://codeclimate.com/github/vlad221213/frontend-project-46/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/2bae1ef0d07fde06c988/test_coverage)](https://codeclimate.com/github/vlad221213/frontend-project-46/test_coverage)
