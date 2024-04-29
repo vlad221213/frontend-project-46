@@ -1,11 +1,10 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/extensions */
-import { readFileSync } from 'node:fs';
 import parse from './utils.js';
 
 const genDiff = (filePath1, filePath2) => {
-  const file1 = parse(readFileSync(filePath1));
-  const file2 = parse(readFileSync(filePath2));
+  const file1 = parse(filePath1);
+  const file2 = parse(filePath2);
   const file1Array = Object.entries(file1);
   const itemsArray1 = file1Array.reduce((acc, [key, value]) => {
     if (!Object.hasOwn(file2, key)) {
