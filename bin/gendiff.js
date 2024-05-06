@@ -12,13 +12,14 @@ program
   .name('gendiff')
   .description('Compares two configuration files and shows a difference.')
   .arguments('<filePath1> <filePath2>')
+  .argument('[styler]', 'output style')
   .option('-V, --version', 'output the version number')
   .option('-f, --format [type]', 'output format')
-  .action((filePath1, filePath2) => {
+  .action((filePath1, filePath2, styler = stylish) => {
     const file1 = parse(filePath1);
     const file2 = parse(filePath2);
     const sortingObject = sorting(spaceFormat(genDiff(file1, file2)));
-    console.log(stylish(sortingObject));
+    console.log(styler(sortingObject));
   });
 
 program.parse();
