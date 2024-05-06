@@ -9,7 +9,8 @@ const genDiff = (file1, file2) => {
     if (Object.hasOwn(node, 'children') && Object.hasOwn(file2, node.name) && typeof file2[node.name] === 'object' && file2[node.name] !== null) {
       acc[`  ${node.name}`] = genDiff(file1[node.name], file2[node.name]);
     }
-    if (Object.hasOwn(node, 'children') && Object.hasOwn(file2, node.name) && typeof file2[node.name] !== 'object') {
+    if ((Object.hasOwn(node, 'children') && Object.hasOwn(file2, node.name) && typeof file2[node.name] !== 'object')
+       || (Object.hasOwn(node, 'content') && Object.hasOwn(file2, node.name) && file1[node.name] !== file2[node.name])) {
       acc[`- ${node.name}`] = file1[node.name];
       acc[`+ ${node.name}`] = file2[node.name];
     }
@@ -18,10 +19,6 @@ const genDiff = (file1, file2) => {
     }
     if (Object.hasOwn(node, 'content') && file1[node.name] === file2[node.name]) {
       acc[`  ${node.name}`] = node.content;
-    }
-    if (Object.hasOwn(node, 'content') && Object.hasOwn(file2, node.name) && file1[node.name] !== file2[node.name]) {
-      acc[`- ${node.name}`] = file1[node.name];
-      acc[`+ ${node.name}`] = file2[node.name];
     }
     return acc;
   }, {});
