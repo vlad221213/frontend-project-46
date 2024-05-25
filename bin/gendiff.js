@@ -3,9 +3,7 @@
 /* eslint-disable import/extensions */
 import { Command } from 'commander';
 import genDiff from '../src/index.js';
-import {
-  sorting, spaceFormat, stylish, parse,
-} from '../src/utils.js';
+import formaterSelection from '../formatters/index.js';
 
 const program = new Command();
 program
@@ -14,12 +12,10 @@ program
   .arguments('<filePath1> <filePath2>')
   .argument('[styler]', 'output style')
   .option('-V, --version', 'output the version number')
-  .option('-f, --format [type]', 'output format')
-  .action((filePath1, filePath2, styler = stylish) => {
-    const file1 = parse(filePath1);
-    const file2 = parse(filePath2);
-    const sortingObject = sorting(spaceFormat(genDiff(file1, file2)));
-    console.log(styler(sortingObject));
+  .option('-f, --format [type]', 'output format', 'stylish')
+  .action((filePath1, filePath2) => {
+    const result = genDiff(filePath1, filePath2, formaterSelection(program.opts().format));
+    console.log(result);
   });
 
 program.parse();
