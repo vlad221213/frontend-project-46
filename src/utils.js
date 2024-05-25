@@ -31,15 +31,28 @@ const mkTree = (object) => {
 };
 
 const sorting = (object) => {
-  const keysArray = Object.keys(object).sort((a, b) => {
+  const lastCharacterSorting = (a, b) => {
+    if (a[a.length - 1] < b[b.length - 1]) {
+      return -1;
+    }
+    if (a[a.length - 1] > b[b.length - 1]) {
+      return 1;
+    }
+    return 0;
+  };
+  const alphabeticalSorting = (a, b) => {
     if (a[2] < b[2]) {
       return -1;
     }
     if (a[2] > b[2]) {
       return 1;
     }
+    if (a[2] === b[2]) {
+      return lastCharacterSorting(a, b);
+    }
     return 0;
-  });
+  };
+  const keysArray = Object.keys(object).sort(alphabeticalSorting);
   const result = keysArray.reduce((acc, key) => {
     if (typeof object[key] === 'object' && object[key] !== null) {
       acc[key] = sorting(object[key]);
@@ -68,25 +81,6 @@ const spaceFormat = (object) => {
   return result;
 };
 
-const stylish = (object) => {
-  const nestingLevel = (structure, level = 1) => {
-    const tree = mkTree(structure);
-    let result = tree.reduce((acc, node) => {
-      if (Object.hasOwn(node, 'children')) {
-        const newLevel = level + 1;
-        acc += `\n${' '.repeat(level * 4 - 2)}${node.name}: ${nestingLevel(structure[node.name], newLevel)}`;
-      }
-      if (Object.hasOwn(node, 'content')) {
-        acc += `\n${' '.repeat(level * 4 - 2)}${node.name}: ${node.content}`;
-      }
-      return acc;
-    }, '{');
-    result += `\n${' '.repeat((level - 1) * 4)}}`;
-    return result;
-  };
-  return nestingLevel(object, 1);
-};
-
 export {
-  mkTree, sorting, spaceFormat, stylish, parse,
+  mkTree, sorting, spaceFormat, parse,
 };
