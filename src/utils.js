@@ -47,10 +47,7 @@ const sorting = (object) => {
     if (a[2] > b[2]) {
       return 1;
     }
-    if (a[2] === b[2]) {
-      return lastCharacterSorting(a, b);
-    }
-    return 0;
+    return lastCharacterSorting(a, b);
   };
   const keysArray = Object.keys(object).sort(alphabeticalSorting);
   const result = keysArray.reduce((acc, key) => {
