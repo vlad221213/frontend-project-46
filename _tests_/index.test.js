@@ -5,6 +5,7 @@ import genDiff from '../index.js';
 import formatterSelection from '../formatters/index.js';
 import stylishOutput from '../_fixtures_/stylishOutput.js';
 import plainOutput from '../_fixtures_/plainOutput.js';
+import resultYml from '../_fixtures_/result_plain.js';
 
 const emptyObject = '{\n}';
 
@@ -20,4 +21,7 @@ test('emptyFileTest', () => {
 test('plainFormatTest', () => {
   expect(genDiff('_fixtures_/file1.json', '_fixtures_/file2.json', formatterSelection('plain'))).toEqual(plainOutput);
   expect(genDiff('_fixtures_/file1.yml', '_fixtures_/file2.yml', formatterSelection('plain'))).toEqual(plainOutput);
+});
+test('HexletYmlTest', () => {
+  expect(genDiff('_fixtures_/file3.yml', '_fixtures_/file4.yml', formatterSelection('plain'))).toEqual(resultYml);
 });

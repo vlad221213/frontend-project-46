@@ -26,7 +26,8 @@ const plain = (object) => {
     }, '');
     return result;
   };
-  return plainFormat(object, '');
+  const result = plainFormat(object, '');
+  return result.slice(0, result.length - 1);
 };
 
 export default plain;
