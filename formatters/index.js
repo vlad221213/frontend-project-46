@@ -3,7 +3,7 @@ import plain from './plain.js';
 import stylish from './stylish.js';
 import json from './json.js';
 
-const formaterSelection = (formaterName) => {
+const formatterSelection = (formaterName) => {
   if (formaterName === 'plain') {
     return plain;
   }
@@ -13,4 +13,4 @@ const formaterSelection = (formaterName) => {
   return stylish;
 };
 
-export default formaterSelection;
+export default formatterSelection;

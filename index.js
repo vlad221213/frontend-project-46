@@ -4,7 +4,7 @@ import {
   mkTree, parse, sorting, spaceFormat,
 } from './src/utils.js';
 
-const genDiff = (filePath1, filePath2, formatName) => {
+const genDiff = (filePath1, filePath2, formatter) => {
   const difference = (file1, file2) => {
     const tree1 = mkTree(file1);
     const tree2 = mkTree(file2);
@@ -41,7 +41,7 @@ const genDiff = (filePath1, filePath2, formatName) => {
   };
   const file1 = parse(filePath1);
   const file2 = parse(filePath2);
-  return formatName(sorting(spaceFormat(difference(file1, file2))));
+  return formatter(sorting(spaceFormat(difference(file1, file2))));
 };
 
 export default genDiff;
