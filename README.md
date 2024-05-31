@@ -35,7 +35,7 @@ dendiff --format JSON filepath1 filepath2
 
 Outputs the result of comparing file1 and file2 in json format.
 
-Examples of using:
+### Examples of using:
 
 
 [![asciicast](https://asciinema.org/a/L2mhYAYOzKvnXZz0X9LhYFZJ5.svg)](https://asciinema.org/a/L2mhYAYOzKvnXZz0X9LhYFZJ5)
