@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
 import { Command } from 'commander';
-import genDiff from '../src/index.js';
+import genDiff from '../index.js';
 import formaterSelection from '../formatters/index.js';
 
 const program = new Command();
