@@ -18,19 +18,19 @@ Gendiff - CLI utility that allows you to display the difference between JSON and
 
 ### Usage
 ```
-dendiff filepath1 filepath2
+gendiff filepath1 filepath2
 ```
 
 Outputs the result of comparing file1 and file2 as an object.
 
 ```
-dendiff --format plain filepath1 filepath2
+gendiff --format plain filepath1 filepath2
 ```
 
 Outputs the result of comparing file1 and file2 in a descriptive format.
 
 ```
-dendiff --format json filepath1 filepath2
+gendiff --format json filepath1 filepath2
 ```
 
 Outputs the result of comparing file1 and file2 in json format.
