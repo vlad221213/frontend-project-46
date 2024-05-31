@@ -19,4 +19,5 @@ test('emptyFileTest', () => {
 });
 test('plainFormatTest', () => {
   expect(genDiff('_fixtures_/file1.json', '_fixtures_/file2.json', formatterSelection('plain'))).toEqual(plainOutput);
+  expect(genDiff('_fixtures_/file1.yml', '_fixtures_/file2.yml', formatterSelection('plain'))).toEqual(plainOutput);
 });
