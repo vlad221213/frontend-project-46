@@ -30,7 +30,7 @@ dendiff --format plain filepath1 filepath2
 Outputs the result of comparing file1 and file2 in a descriptive format.
 
 ```
-dendiff --format JSON filepath1 filepath2
+dendiff --format json filepath1 filepath2
 ```
 
 Outputs the result of comparing file1 and file2 in json format.
