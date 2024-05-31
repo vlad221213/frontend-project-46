@@ -1,5 +1,6 @@
 install:
 	npm ci;
+	npm link;
 gendiff:
 	node gendiff.js -h;
 publish:
