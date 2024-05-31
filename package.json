@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
-  "description": "[![Actions Status](https://github.com/vlad221213/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/vlad221213/frontend-project-46/actions)",
+  "description": "[![Actions Status](https://github.com/vlad221213/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/vlad221213/frontend-project-46/actions)   Gendiff - CLI utility that allows you to display the difference between JSON and YML files in various formats.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
