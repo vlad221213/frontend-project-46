@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-param-reassign */
-import { mkTree } from '../src/utils.js';
+import { mkTree, output } from '../src/utils.js';
 
 const plain = (object) => {
   const plainFormat = (structure, filePath) => {
@@ -12,7 +12,7 @@ const plain = (object) => {
       }
       if (node.name[0] === '-' && Object.hasOwn(structure, `+ ${node.name.slice(2)}`)) {
         const newFilePath = `${filePath}${node.name.slice(2)}`;
-        acc += `Property '${newFilePath}' was updated. From ${structure[`- ${node.name.slice(2)}`]} to ${structure[`+ ${node.name.slice(2)}`]}\n`;
+        acc += `Property '${newFilePath}' was updated. From ${output(structure[`- ${node.name.slice(2)}`])} to ${output(structure[`+ ${node.name.slice(2)}`])}\n`;
       }
       if (node.name[0] === '-' && !Object.hasOwn(structure, `+ ${node.name.slice(2)}`)) {
         const newFilePath = `${filePath}${node.name.slice(2)}`;
@@ -20,7 +20,7 @@ const plain = (object) => {
       }
       if (node.name[0] === '+' && !Object.hasOwn(structure, `- ${node.name.slice(2)}`)) {
         const newFilePath = `${filePath}${node.name.slice(2)}`;
-        acc += `Property '${newFilePath}' was added with value: ${structure[`+ ${node.name.slice(2)}`]}\n`;
+        acc += `Property '${newFilePath}' was added with value: ${output(structure[`+ ${node.name.slice(2)}`])}\n`;
       }
       return acc;
     }, '');
