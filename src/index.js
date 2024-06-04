@@ -1,5 +1,7 @@
-import parse from './parsers';
-import mkTree from './tree';
+/* eslint-disable import/extensions */
+import parse from './parsers.js';
+import mkTree from './tree.js';
+import stylish from '../formatters/stylish.js';
 
 const spaceFormat = (object) => {
   const keysArray = Object.keys(object);
@@ -49,7 +51,7 @@ const sorting = (object) => {
   return result;
 };
 
-const genDiff = (filePath1, filePath2, formatter) => {
+const genDiff = (filePath1, filePath2, formatter = stylish) => {
   const difference = (file1, file2) => {
     const tree1 = mkTree(file1);
     const tree2 = mkTree(file2);
