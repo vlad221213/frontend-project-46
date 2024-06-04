@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-param-reassign */
-import mkTree from '../src/tree.js';
+import { mkTree } from '../src/tree.js';
 
 const stylish = (object) => {
   const nestingLevel = (structure, level = 1) => {
