@@ -1,6 +1,18 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-param-reassign */
-import { mkTree, output } from '../src/utils.js';
+import mkTree from '../src/tree.js';
+
+const output = (value) => {
+  let result;
+  if (typeof value === 'string') {
+    result = `'${value}'`;
+  } else if (typeof value === 'object' && value !== null) {
+    result = '[complex value]';
+  } else {
+    result = value;
+  }
+  return result;
+};
 
 const plain = (object) => {
   const plainFormat = (structure, filePath) => {
