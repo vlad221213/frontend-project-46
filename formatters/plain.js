@@ -1,6 +1,4 @@
-/* eslint-disable import/extensions */
 /* eslint-disable no-param-reassign */
-import { mkTree } from '../src/tree.js';
 
 const output = (value) => {
   let result;
@@ -14,31 +12,30 @@ const output = (value) => {
   return result;
 };
 
-const plain = (object) => {
-  const plainFormat = (structure, filePath) => {
-    const tree = mkTree(structure);
+const plain = (array) => {
+  const plainFormat = (tree, filePath) => {
     const result = tree.reduce((acc, node) => {
-      if (Object.hasOwn(node, 'children') && node.name[0] === ' ') {
-        const newFilePath = `${filePath}${node.name.slice(2)}.`;
-        acc += plainFormat(structure[node.name], newFilePath);
+      if (Object.hasOwn(node, 'children') && node.stat === 'unchanged') {
+        const newFilePath = `${filePath}${node.name}.`;
+        acc += plainFormat(node.children, newFilePath);
       }
-      if (node.name[0] === '-' && Object.hasOwn(structure, `+ ${node.name.slice(2)}`)) {
-        const newFilePath = `${filePath}${node.name.slice(2)}`;
-        acc += `Property '${newFilePath}' was updated. From ${output(structure[`- ${node.name.slice(2)}`])} to ${output(structure[`+ ${node.name.slice(2)}`])}\n`;
+      if (node.stat === 'changed') {
+        const newFilePath = `${filePath}${node.name}`;
+        acc += `Property '${newFilePath}' was updated. From ${output(node.file1)} to ${output(node.file2)}\n`;
       }
-      if (node.name[0] === '-' && !Object.hasOwn(structure, `+ ${node.name.slice(2)}`)) {
-        const newFilePath = `${filePath}${node.name.slice(2)}`;
+      if (node.stat === 'deleted') {
+        const newFilePath = `${filePath}${node.name}`;
         acc += `Property '${newFilePath}' was removed\n`;
       }
-      if (node.name[0] === '+' && !Object.hasOwn(structure, `- ${node.name.slice(2)}`)) {
-        const newFilePath = `${filePath}${node.name.slice(2)}`;
-        acc += `Property '${newFilePath}' was added with value: ${output(structure[`+ ${node.name.slice(2)}`])}\n`;
+      if (node.stat === 'added') {
+        const newFilePath = `${filePath}${node.name}`;
+        acc += `Property '${newFilePath}' was added with value: ${output(node.content)}\n`;
       }
       return acc;
     }, '');
     return result;
   };
-  const result = plainFormat(object, '');
+  const result = plainFormat(array, '');
   return result.slice(0, result.length - 1);
 };
 
