@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { readFileSync } from 'node:fs';
 import parse from './parsers.js';
 import stylish from '../formatters/stylish.js';
-import { difference } from './tree.js';
+import difference from './tree.js';
 
 const sort = (array) => {
   const sortedArray = _.sortBy(array, (item) => item.name);

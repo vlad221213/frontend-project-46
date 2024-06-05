@@ -48,4 +48,4 @@ const difference = (file1, file2) => {
   return diff2;
 };
 
-export { mkTree, difference };
+export default difference;
