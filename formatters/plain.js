@@ -1,15 +1,13 @@
 /* eslint-disable no-param-reassign */
 
 const output = (value) => {
-  let result;
   if (typeof value === 'string') {
-    result = `'${value}'`;
-  } else if (typeof value === 'object' && value !== null) {
-    result = '[complex value]';
-  } else {
-    result = value;
+    return `'${value}'`;
   }
-  return result;
+  if (typeof value === 'object' && value !== null) {
+    return '[complex value]';
+  }
+  return value;
 };
 
 const plain = (array) => {

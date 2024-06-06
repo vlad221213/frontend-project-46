@@ -15,7 +15,7 @@ const stylish = (array) => {
     if (typeof tree !== 'object' || tree === null) {
       return tree;
     }
-    let result = tree.reduce((acc, node) => {
+    const output = tree.reduce((acc, node) => {
       const newLevel = level + 1;
       if (Object.hasOwn(node, 'children')) {
         acc += `\n${' '.repeat(level * 4 - 2)}${getSign(tree.stat)} ${node.name}: ${nestingLevel(node.children, newLevel)}`;
@@ -27,7 +27,7 @@ const stylish = (array) => {
       }
       return acc;
     }, '{');
-    result += `\n${' '.repeat((level - 1) * 4)}}`;
+    const result = `${output}\n${' '.repeat((level - 1) * 4)}}`;
     return result;
   };
   return nestingLevel(array, 1);

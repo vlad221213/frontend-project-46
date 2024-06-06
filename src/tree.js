@@ -22,26 +22,25 @@ const difference = (file1, file2) => {
   const tree2 = mkTree(file2);
   const diff1 = tree1.reduce((acc, node) => {
     if (Object.hasOwn(node, 'children') && Object.hasOwn(file2, node.name) && typeof file2[node.name] === 'object' && file2[node.name] !== null) {
-      acc[`  ${node.name}`] = difference(file1[node.name], file2[node.name]);
-      acc.push({ name: node.name, children: difference(file1[node.name], file2[node.name]), stat: 'unchanged' });
+      acc[acc.length] = { name: node.name, children: difference(file1[node.name], file2[node.name]), stat: 'unchanged' };
     }
     if ((Object.hasOwn(node, 'children') && Object.hasOwn(file2, node.name) && typeof file2[node.name] !== 'object')
        || (Object.hasOwn(node, 'content') && Object.hasOwn(file2, node.name) && file1[node.name] !== file2[node.name])) {
-      acc.push({
+      acc[acc.length] = {
         name: node.name, file1: mkTree(file1[node.name]), file2: mkTree(file2[node.name]), stat: 'changed',
-      });
+      };
     }
     if (!Object.hasOwn(file2, node.name)) {
-      acc.push({ name: node.name, content: mkTree(file1[node.name]), stat: 'deleted' });
+      acc[acc.length] = { name: node.name, content: mkTree(file1[node.name]), stat: 'deleted' };
     }
     if (Object.hasOwn(node, 'content') && file1[node.name] === file2[node.name]) {
-      acc.push({ name: node.name, content: node.content, stat: 'unchanged' });
+      acc[acc.length] = { name: node.name, content: node.content, stat: 'unchanged' };
     }
     return acc;
   }, []);
   const diff2 = tree2.reduce((acc, node) => {
     if (!Object.hasOwn(file1, node.name)) {
-      acc.push({ name: node.name, content: mkTree(file2[node.name]), stat: 'added' });
+      acc[acc.length] = { name: node.name, content: mkTree(file2[node.name]), stat: 'added' };
     }
     return acc;
   }, diff1);
