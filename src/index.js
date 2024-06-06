@@ -3,7 +3,7 @@ import path from 'node:path';
 import _ from 'lodash';
 import { readFileSync } from 'node:fs';
 import parse from './parsers.js';
-import stylish from '../formatters/stylish.js';
+import formatterSelection from '../formatters/index.js';
 import difference from './tree.js';
 
 const sort = (array) => {
@@ -21,9 +21,10 @@ const sort = (array) => {
 
 const getFormat = (filePath) => path.extname(filePath);
 
-const genDiff = (filePath1, filePath2, formatter = stylish) => {
+const genDiff = (filePath1, filePath2, formatName = 'stylish') => {
   const file1 = parse(readFileSync(filePath1), getFormat(filePath1));
   const file2 = parse(readFileSync(filePath2), getFormat(filePath2));
+  const formatter = formatterSelection(formatName);
   return formatter(sort(difference(file1, file2)));
 };
 
