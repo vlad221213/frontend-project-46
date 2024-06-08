@@ -15,14 +15,15 @@ const json = (tree) => {
     }
     const result = array.reduce((acc, node) => {
       if (Object.hasOwn(node, 'children')) {
-        acc[`${getSign(node.stat)}${node.name}`] = jsonFormat(node.children);
-      } else if (node.stat === 'changed') {
-        acc[`-${node.name}`] = jsonFormat(node.file1);
-        acc[`+${node.name}`] = jsonFormat(node.file2);
-      } else {
-        acc[`${getSign(node.stat)}${node.name}`] = jsonFormat(node.content);
+        const item = { [`${getSign(node.stat)}${node.name}`]: jsonFormat(node.children) };
+        return { ...acc, ...item };
+      } if (node.stat === 'changed') {
+        const item1 = { [`-${node.name}`]: jsonFormat(node.file1) };
+        const item2 = { [`+${node.name}`]: jsonFormat(node.file2) };
+        return { ...acc, ...item1, ...item2 };
       }
-      return acc;
+      const item = { [`${getSign(node.stat)}${node.name}`]: jsonFormat(node.content) };
+      return { ...acc, ...item };
     }, {});
     return result;
   };

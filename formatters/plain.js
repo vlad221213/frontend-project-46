@@ -15,19 +15,23 @@ const plain = (array) => {
     const result = tree.reduce((acc, node) => {
       if (Object.hasOwn(node, 'children') && node.stat === 'unchanged') {
         const newFilePath = `${filePath}${node.name}.`;
-        acc += plainFormat(node.children, newFilePath);
+        const item = plainFormat(node.children, newFilePath);
+        return `${acc}${item}`;
       }
       if (node.stat === 'changed') {
         const newFilePath = `${filePath}${node.name}`;
-        acc += `Property '${newFilePath}' was updated. From ${output(node.file1)} to ${output(node.file2)}\n`;
+        const item = `Property '${newFilePath}' was updated. From ${output(node.file1)} to ${output(node.file2)}\n`;
+        return `${acc}${item}`;
       }
       if (node.stat === 'deleted') {
         const newFilePath = `${filePath}${node.name}`;
-        acc += `Property '${newFilePath}' was removed\n`;
+        const item = `Property '${newFilePath}' was removed\n`;
+        return `${acc}${item}`;
       }
       if (node.stat === 'added') {
         const newFilePath = `${filePath}${node.name}`;
-        acc += `Property '${newFilePath}' was added with value: ${output(node.content)}\n`;
+        const item = `Property '${newFilePath}' was added with value: ${output(node.content)}\n`;
+        return `${acc}${item}`;
       }
       return acc;
     }, '');
