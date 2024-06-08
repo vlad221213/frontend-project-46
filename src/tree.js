@@ -42,7 +42,8 @@ const difference = (file1, file2) => {
   }, []);
   const diff2 = tree2.reduce((acc, node) => {
     if (!Object.hasOwn(file1, node.name)) {
-      acc[acc.length] = { name: node.name, content: mkTree(file2[node.name]), stat: 'added' };
+      const item = { name: node.name, content: mkTree(file2[node.name]), stat: 'added' };
+      return [item, ...acc];
     }
     return acc;
   }, diff1);
